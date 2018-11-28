@@ -1,0 +1,15 @@
+<launch>
+
+	<arg name="veh"/>
+	<param name="~veh" value="$(arg veh)"/>
+	<group ns="$(arg veh)">
+
+
+	    <node name="image_transformer_node" pkg="anti_instagram" type="image_transformer_node.py" output="screen">
+            <!--remap from="/tesla/camera_node/image/compressed" to="/$(arg veh)/image_transformer_node/uncorrected_image" /-->
+        </node>
+
+
+    </group>
+
+</launch>

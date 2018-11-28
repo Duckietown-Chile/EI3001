@@ -1,0 +1,23 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle" />
+	<arg name="pkg_name" default="object_detection"/>
+	<arg name="node_name" default="object_detection_node"/>
+	<arg name="local" default="true" />
+	<arg name="publish_freq" />
+
+
+
+	<!-- Vehicle Tracker Node -->
+<remap from="camera_node/image/compressed" to="decoder_node/image/compressed" />
+	<include file="$(find multivehicle_tracker)/launch/multivehicle_tracker.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)" />
+	</include>
+
+<!-- Vehicle Detector Node -->
+	<include file="$(find object_detection)/launch/object_detection.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)" />
+		<arg name="node_name" default="$(arg node_name)"/>
+	</include>
+</launch>

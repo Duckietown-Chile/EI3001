@@ -1,0 +1,8 @@
+<launch>
+  
+  <include file="$(find intersection_navigation)/launch/intersection_navigation_node.launch">
+  </include>
+
+  <include file="$(find intersection_localization)/launch/intersection_localization_node.launch">
+  </include>
+</launch>

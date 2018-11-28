@@ -1,0 +1,9 @@
+detection_threshold: .02
+iteration_threshold: 6
+SlotTime: 1.0
+right_priority_thresholdy: 0.2
+right_priority_thresholdx: 0.6
+right_priority: True
+FOI_right: -0.9
+FOI_front: 0.9
+FOI_left: 0.5

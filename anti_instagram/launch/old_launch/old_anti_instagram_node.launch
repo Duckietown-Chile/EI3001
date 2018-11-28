@@ -1,0 +1,8 @@
+<launch>
+	<arg name="veh"/>
+	<param name="~veh" value="$(arg veh)"/>
+	<group ns="$(arg veh)">
+        <node name="old_anti_instagram_node" pkg="anti_instagram" type="old_anti_instagram_node.py" output="screen"/>
+    </group>
+
+</launch>

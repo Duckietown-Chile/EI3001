@@ -1,0 +1,24 @@
+<launch>
+
+    <arg name="veh"/>
+    <arg name="geom" default="true" doc="use geometry considerations with true just bottom 0.6 of image with false"/>
+    <arg name="cents" default="6" doc="number of cluster centers for kmeans"/>
+    <arg name="blur" default="none" doc="type of blurring applied to image as preprocessing"/>
+    <arg name="resize" default="1" doc="resizing factor to scale the image down or up"/>
+    <arg name="ker" default="5" doc="size of blur kernel"/>
+
+    <param name="~veh" value="$(arg veh)"/>
+
+    <group ns="$(arg veh)">
+        <!-- run local -->
+	<node name="anti_instagram_node" pkg="anti_instagram" type="anti_instagram_node.py" output="screen">
+	  <remap from="~uncorrected_image" to="camera_node/image/compressed"/>
+	  <param name="n_centers" type="int" value="$(arg cents)"/>
+	  <param name="fancyGeom" type="boolean" value="$(arg geom)"/>
+	  <param name="blur" type="str" value="$(arg blur)"/>
+	  <param name="resize" type="double" value="$(arg resize)"/>
+	  <param name="blur_kernel" type="int" value="$(arg ker)"/>
+	</node>
+    </group>
+
+</launch>

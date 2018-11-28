@@ -1,0 +1,37 @@
+
+<launch>
+
+	<arg name="veh"/>
+	<arg name="ai_interval" default="10" doc="time interval after which the ai algorithm should be re-performed"/>
+	<arg name="geom" default="false" doc="use geometry considerations with true just bottom 0.6 of image with false"/>
+    <arg name="cents" default="6" doc="number of cluster centers for kmeans"/>
+    <arg name="blur" default="median" doc="type of blurring applied to image as preprocessing"/>
+    <arg name="resize" default="0.2" doc="resizing factor to scale the image down or up"/>
+    <arg name="ker" default="5" doc="size of blur kernel"/>
+    <arg name="ai_trafo_mode" default="cb" doc="'cb' for colo balance only; 'lin' for linear trafo only; 'both' for both"/>
+    <arg name="cb_percentage" default="80" doc="percentage for auto-colorbalance"/>
+
+    <param name="~veh" value="$(arg veh)"/>
+
+	<group ns="$(arg veh)">
+
+
+	    <node name="image_transformer_node" pkg="anti_instagram" type="image_transformer_node.py" output="screen">
+	        <param name="~trafo_mode" type="str" value="$(arg ai_trafo_mode)"/>
+            <!--remap from="/tesla/camera_node/image/compressed" to="~uncorrected_image" /-->
+        </node>
+
+        <node name="cont_anti_instagram_node" pkg="anti_instagram" type="cont_anti_instagram_node.py" output="screen">
+            <param name="~ai_interval" value="$(arg ai_interval)"/>
+            <param name="~n_centers" type="int" value="$(arg cents)"/>
+	        <param name="~fancyGeom" type="boolean" value="$(arg geom)"/>
+	        <param name="~blur" type="str" value="$(arg blur)"/>
+	        <param name="~resize" type="double" value="$(arg resize)"/>
+	        <param name="~blur_kernel" type="int" value="$(arg ker)"/>
+	        <param name="~trafo_mode" type="str" value="$(arg ai_trafo_mode)"/>
+	        <param name="~cb_percentage" type="int" value="$(arg cb_percentage)"/>
+        </node>
+
+    </group>
+
+</launch>

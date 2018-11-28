@@ -1,0 +1,9 @@
+k_angle: 8
+acc_max: 0.3
+dec_max: 1
+dec_nom: 0.2
+v_max: 1.2
+v_r_max: 0.4
+angle_max: 1.0472
+wheel_base: 0.2
+accel_fun(v,v_max, acc_max, throttle): "acc_max*(v_max-v)/v_max*throttle"
