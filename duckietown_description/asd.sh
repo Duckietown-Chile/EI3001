@@ -1,0 +1,1 @@
+ roslaunch duckietown_description csv2xacro_node.launch tile_map_csv:=${PWD}/tiles_duckietown.csv tag_map_csv:=${PWD}/tags_duckietown.csv map_name:=test_map  && roslaunch duckietown_description duckietown_description_node.launch map_name:=test_map veh:=duckiebot gui:=true
